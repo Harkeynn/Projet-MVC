@@ -1,6 +1,93 @@
-<?php 
-echo "Identifiant :" .  $user[0]['identifiant']. "<br>";
-echo "Id user : " . $user[0]['id_user'] . "<br>";
-echo "Prenom : " . $user[0]['prenom'];
+<?php
+if(!isset($_SESSION['identifiant'])){
+    $readonly='readonly';
+    $modifier='';
+    $supprimer='';
+}else{
+    if($_GET['id']==$_SESSION['id_user']){
+        $readonly='';
+        $modifier='<button type="submit" class="medium button">Modifier</button>';
+        $supprimer='<form action="index.php?uc=user&action=delete" method="post">
+                        <input type="hidden" name="id" value="'.$user[0]['id_user'].'"/>
+                        <button type="submit" class="medium button">
+                            Supprimer utilisateur
+                        </button>
+                    </form>';
+    }else{
+        $readonly='readonly';
+        $modifier='';
+        $supprimer='';
+    }
+}
 
+echo '<form action="index.php?uc=user&action=edit&id='.$user[0]['id_user'].'" method="post">
+    <div class="row">
+        <div class="large-6 columns">
+            <div class="row">
+                Identifiant :
+                <input type="text" name="identifiant" value="'.$user[0]['identifiant'].'" '.$readonly.'/>
+            </div>
+            <div class="row">
+                Mot de passe :
+                <input type="password" name="pwd" value="'.$user[0]['mot_de_passe'].'" '.$readonly.'/>
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <div class="row">
+                <div class="medium-6 columns">
+                    Nom :
+                    <input type="text" name="nom" value="'.$user[0]['nom'].'" '.$readonly.'/>
+                </div>
+                <div class="medium-6 columns">
+                    Prenom :
+                    <input type="text" name="prenom" value="'.$user[0]['prenom'].'" '.$readonly.'/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-12 columns">
+                    Adresse :
+                    <input type="text" name="adresse" value="'.$user[0]['adresse_rue'].'" '.$readonly.'/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-4 columns">
+                    Code postal :
+                    <input type="text" name="cp" value="'.$user[0]['adresse_cp'].'" '.$readonly.'/>
+                </div>
+                <div class="medium-8 columns">
+                    Ville :
+                    <input type="text" name="ville" value="'.$user[0]['adresse_ville'].'" '.$readonly.'/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-12 columns">
+                    Email :
+                    <input type="text" name="mail" value="'.$user[0]['email'].'" '.$readonly.'/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-4 columns">
+                    Date de naissance :
+                    <input type="date" name="naissance" value="'.$user[0]['date_de_naissance'].'" '.$readonly.'/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-1 columns">
+            '.$modifier.'
+        </div>
+        </form>
+        <div class="medium-3 columns">
+            '.$supprimer.'
+        </div>
+        <div class="medium-8 columns">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-1 columns">
+            <a class="medium button" href="javascript:history.go(-1)">Retour</a>
+        </div>
+    </div>';
 ?>

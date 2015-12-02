@@ -8,11 +8,11 @@ class Connection{
 	}
 
 	public static function db_connect() {
-		try 
+		try
 		{
-			$bdd = new PDO('mysql:host=localhost;dbname=site_mvc', 'site_mvc', 'site_mvc');
+			$bdd = new PDO('mysql:host=localhost;dbname=gestion_cv', 'Harkeynn', 'phbor123');
 			return $bdd;
-		} 
+		}
 		catch (Exception $e) {
 			die('Erreur : ' .$e->getMessage());
 		}
